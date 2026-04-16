@@ -17,3 +17,19 @@ export const createExtraAccount = async (req, res, next) => {
 
     return res.status(201).json({ message: "Account Created", account });
 };
+
+export const getMyAccount = async (req, res, next) => {
+
+    const account = await accountModel.findOne({
+        userId: req.user._id
+    });
+
+    if (!account) return next(new Error("Account not found"));
+
+    return res.json({
+        accountNumber: account.accountNumber,
+        balance: account.balance,
+        status: account.status,
+        currency: account.currency
+    });
+};

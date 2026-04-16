@@ -3,29 +3,31 @@ import mongoose from "mongoose";
 const beneficiarySchema = new mongoose.Schema(
     {
         userId: {
-            type: mongoose.Types.ObjectId,
-            ref: "User",
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "UserModel",
             required: true,
+            index: true
         },
 
         accountNumber: {
             type: String,
             required: true,
+            trim: true
         },
 
         name: {
             type: String,
             required: true,
+            trim: true
         },
 
         nickname: {
-            type: String, 
-        },
+            type: String,
+            trim: true
+        }
     },
     { timestamps: true }
 );
 
-export const BeneficiaryModel = mongoose.model(
-    "BeneficiaryModel",
-    beneficiarySchema
-);
+const BeneficiaryModel = mongoose.model("BeneficiaryModel", beneficiarySchema);
+export default BeneficiaryModel;

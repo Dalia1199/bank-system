@@ -1,7 +1,10 @@
 import  UserModel  from "../../DB/models/usermodel.js";
 import AccountModel from "../../DB/models/bankaccout.js";
-import { hash } from "../../common/utilities/security/hash.js";
+import { hash,compare } from "../../common/utilities/security/hash.js";
 import jwt from "jsonwebtoken";
+
+
+
 
 export const register = async (req, res, next) => {
     const { name, email, password } = req.body;
@@ -9,7 +12,7 @@ export const register = async (req, res, next) => {
     const exist = await UserModel.findOne({ email });
     if (exist) return next(new Error("Email exists", { cause: 409 }));
 
-    const hashedPassword = hash({ plaintext: password });
+    const hashedPassword = hash({ plain_text: password });
 
     const user = await UserModel.create({
         name,

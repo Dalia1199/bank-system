@@ -1,28 +1,32 @@
 import mongoose from "mongoose";
 
-const revoketoken = new mongoose.Schema({
-    tokenid: {
-        type: String,
-        required: true,
-        trim: true
+const revokeTokenSchema = new mongoose.Schema(
+    {
+        tokenId: {
+            type: String,
+            required: true,
+            trim: true,
+            index: true
+        },
+
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "UserModel",
+            required: true,
+            index: true
+        },
+
+        expiredAt: {
+            type: Date,
+            required: true
+        }
     },
-    userid: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
-        required: true
-    },
+    {
+        timestamps: true
+    }
+);
 
+revokeTokenSchema.index({ expiredAt: 1 }, { expireAfterSeconds: 0 });
 
-    expiredat: {
-        type: Date,
-        required: true,
-
-    },
-}, {
-    timestamps: true,
-    strictQuery: true,
-
-})
-revoketokenschema.index({ expiredat: 1 }, { expireafterseconds: 0 })
-const remodel = mongoose.models.revoketoken || mongoose.model("revoketoken", revoketokenschema);
-export default remodel
+const RevokeTokenModel = mongoose.model("RevokeTokenModel", revokeTokenSchema);
+export default RevokeTokenModel;

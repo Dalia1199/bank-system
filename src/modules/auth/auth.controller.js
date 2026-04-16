@@ -5,7 +5,16 @@ import * as schema from "./auth.validation.js";
 
 const router = Router();
 
-router.post("/register", validation(schema.registerSchema), service.register);
-router.post("/login", validation(schema.loginSchema), service.login);
-// console.log(req.body);
+router.post(
+    "/register",
+    validation(schema.registerSchema),
+    service.register
+);
+
+router.post(
+    "/login",
+    validation(schema.loginSchema),
+    service.login
+);
+
 export default router;

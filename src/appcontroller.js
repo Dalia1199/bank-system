@@ -21,16 +21,17 @@ const bootstrap = () => {
     app.use("/transaction", transactionRouter);
     app.use("/summary", summaryRouter);
 
-    // Global Error Handling
-    app.use(globalErrorHandler);
+   
 
     app.use("{/*demo}", (req, res, next) => {
         throw new Error(`url ${req.originalUrl}not found`, { cause: 404 })
-    }) };
+    }) ;
+    app.use(globalErrorHandler);
 
 app.listen(port, () => {
     console.log(`server is running on port${port} 😊`)
 })
+}
 
 
 export default bootstrap;
