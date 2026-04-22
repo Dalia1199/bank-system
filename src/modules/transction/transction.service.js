@@ -83,7 +83,7 @@ export const withdraw = async (req, res, next) => {
 
 
 // =========================
-// 30 - Transfer (NO SESSION)
+//transfer 
 // =========================
 export const transfer = async (req, res, next) => {
     const { fromAccount, toAccount, amount } = req.body;
